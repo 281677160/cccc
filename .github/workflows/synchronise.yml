@@ -88,6 +88,7 @@ jobs:
         elif [[ "${{ env.again-fork }}" == "4" ]]; then
           echo "拉取整个上游仓库覆盖您现在的仓库"
           rm -rf repogx/*
+          rm -rf repogx/.github/workflows/*
           cp -Rf shangyou/* repogx/
         else
           echo "未知错误,关闭同步更新上游仓库"
