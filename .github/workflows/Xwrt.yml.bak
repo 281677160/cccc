@@ -15,27 +15,27 @@
 #
 #
 
-name: Lede-大雕2
+name: Xwrt-源码
 on:
   workflow_dispatch:
     inputs:
       REPO_BRANCH:
-        description: '大雕源码'
+        description: 'x-wrt源码-请选择分支'
         required: false
         default: 'master'
         type: choice
         options:
           - 'master'
+          - '21.10'
+          - '22.03'
+          - 'pr-fix-nand_do_platform_check'
+          - 'pr-rm-ax6000'
       CONFIG_FILE:
         description: '配置文件'
         required: false
         default: 'x86_64'
         type: choice
         options:
-          - 'asus_rt-acrh17'
-          - 'd-team_newifi-d2'
-          - 'p2w_r619ac-128m'
-          - 'x86_32'
           - 'x86_64'
       CPU_SELECTION:
         description: 'CPU优选,增加编译速度'
@@ -102,8 +102,8 @@ env:
   PUSH_PLUS_TOKEN: ${{ secrets.PUSH_PLUS_TOKEN }}
   TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
   TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-  SOURCE_CODE: COOLSNOWWOLF
-  FOLDER_NAME: Lede
+  SOURCE_CODE: XWRT
+  FOLDER_NAME: Xwrt
   TZ: Asia/Shanghai
 
 jobs:

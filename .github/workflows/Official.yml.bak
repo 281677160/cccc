@@ -15,16 +15,19 @@
 #
 #
 
-name: Lede-大雕2
+name: openwrt-官方
 on:
   workflow_dispatch:
     inputs:
       REPO_BRANCH:
-        description: '大雕源码'
+        description: '官方源码-请选择分支'
         required: false
-        default: 'master'
+        default: 'openwrt-22.03'
         type: choice
         options:
+          - 'openwrt-22.03'
+          - 'openwrt-21.02'
+          - 'openwrt-19.07'
           - 'master'
       CONFIG_FILE:
         description: '配置文件'
@@ -32,10 +35,6 @@ on:
         default: 'x86_64'
         type: choice
         options:
-          - 'asus_rt-acrh17'
-          - 'd-team_newifi-d2'
-          - 'p2w_r619ac-128m'
-          - 'x86_32'
           - 'x86_64'
       CPU_SELECTION:
         description: 'CPU优选,增加编译速度'
@@ -102,8 +101,8 @@ env:
   PUSH_PLUS_TOKEN: ${{ secrets.PUSH_PLUS_TOKEN }}
   TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
   TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-  SOURCE_CODE: COOLSNOWWOLF
-  FOLDER_NAME: Lede
+  SOURCE_CODE: OFFICIAL
+  FOLDER_NAME: Official
   TZ: Asia/Shanghai
 
 jobs:
