@@ -188,6 +188,7 @@ jobs:
         done
         
     - name: 删除不需要的机型文
+      run: |
         sudo chmod -R +x ${GITHUB_WORKSPACE}/repogx
         cd ${GITHUB_WORKSPACE}/repogx
         git add .
