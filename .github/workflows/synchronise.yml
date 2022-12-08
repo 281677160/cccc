@@ -133,6 +133,25 @@ jobs:
         git push --quiet "https://${{ secrets.REPO_TOKEN }}@github.com/${{github.repository}}" HEAD:main
         echo "同步完成，请注意查看文件的变化和设置好!"
         
+    - name: 建立机型文件夹
+      if: env.REPO_TOKEN && github.event.inputs.Establish == 'true' && env.inputs_Establish == '1'
+      run: |
+        git clone -b main https://github.com/${{github.repository}}.git repogx
+        aa="${{ github.event.inputs.jianli }}"
+        bb="${{ github.event.inputs.jixing }}"
+        if [[ ! -d "repogx/build/${bb}" ]]; then
+          cp -Rf repogx/build/"$aa" repogx/build/"$bb"
+          echo "[${bb}]文件夹创建完成"
+        else
+          echo "[${bb}]文件夹已存在"
+        fi
+        sudo chmod -R +x ${GITHUB_WORKSPACE}/repogx
+        cd ${GITHUB_WORKSPACE}/repogx
+        git add .
+        git commit -m "Update $(date +%Y-%m%d-%H%M%S)"
+        git push --quiet "https://${{ secrets.REPO_TOKEN }}@github.com/${{github.repository}}" HEAD:main
+        echo "[${bb}]文件夹创建完成"
+        
     - name: 删除不需要的机型文件夹
       if: env.REPO_TOKEN && github.event.inputs.Deletefile == 'true' && env.inputs_Deletefile == '1'
       run: |
