@@ -121,11 +121,7 @@ jobs:
            dd=${X}
         done
         for cc in ${bb[@]}; do
-         if [[ "${cc}" == "${dd}" ]]; then
           rm -rf repogx/build/*"${cc}"*
-         else
-          echo "[${cc}]文件夹不存在"
-         fi
         done
         sudo chmod -R +x ${GITHUB_WORKSPACE}/repogx
         cd ${GITHUB_WORKSPACE}/repogx
