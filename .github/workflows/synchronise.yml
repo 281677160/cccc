@@ -115,14 +115,14 @@ jobs:
       if: env.REPO_TOKEN && env.again-fork == '0' && env.again-delete == '1'
       run: |
         git clone -b main https://github.com/${{github.repository}}.git repogx
-        aa=${{ github.event.inputs.delete }}
+        aa="${{ github.event.inputs.delete }}"
         bb=(${aa//,/ })
-        for X in $(ls -1 ${GITHUB_WORKSPACE}/repogx/build); do
+        for X in $(ls -1 repogx/build); do
            dd=${X}
         done
         for cc in ${bb[@]}; do
          if [[ "${cc}" == "${dd}" ]]; then
-          rm -rf ${GITHUB_WORKSPACE}/repogx/build/*"${cc}"*
+          rm -rf repogx/build/*"${cc}"*
          else
           echo "[${cc}]文件夹不存在"
          fi
