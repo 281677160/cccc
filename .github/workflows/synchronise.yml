@@ -118,10 +118,14 @@ jobs:
         aa="${{ github.event.inputs.delete }}"
         bb=(${aa//,/ })
         for X in $(ls -1 repogx/build); do
-           dd=${X}
+           echo "${X}"
         done
         for cc in ${bb[@]}; do
-          rm -rf repogx/build/*"${cc}"*
+         if [[ "${cc}" == "${X}" ]]; then
+          rm -rf repogx/build/*"$cc"*
+         else
+          echo "[${cc}]文件夹不存在"
+         fi
         done
         sudo chmod -R +x ${GITHUB_WORKSPACE}/repogx
         cd ${GITHUB_WORKSPACE}/repogx
