@@ -71,7 +71,7 @@ jobs:
           echo "again-fork=4" >> ${GITHUB_ENV}
         fi
         
-        if [[ -z "${{ github.event.inputs.fork }}" ]]; then
+        if [[ -n "${{ github.event.inputs.fork }}" ]]; then
           echo "again-delete=1" >> ${GITHUB_ENV}
         fi
         
