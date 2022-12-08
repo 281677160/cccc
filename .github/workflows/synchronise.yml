@@ -17,7 +17,7 @@ on:
         default: 'true'
         type: boolean
       fork:
-        description: '请选择'
+        description: '请选择同步项'
         required: false
         default: '关闭'
         type: choice
@@ -33,7 +33,18 @@ on:
         default: 'true'
         type: boolean
       Tempoary_IP:
-        description: '固件IP地址 [选填]'
+        description: '请输入要删除的文件夹名称,一次删除多个请用英文逗号分开'
+        default: ''
+      SKI_E5CPU:
+        description: '==在build文件夹创建机型文件夹=='
+        required: false
+        default: 'true'
+        type: boolean
+      Tepoary_IP:
+        description: '以build文件夹里有的源码为蓝本（文件夹名称）'
+        default: ''
+      Tepoar_IP:
+        description: '您需要创建的文件夹名称'
         default: ''
 
 env:
