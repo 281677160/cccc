@@ -100,7 +100,7 @@ jobs:
         fi
         
     - name: 同步更新上游仓库
-      if: env.REPO_TOKEN  && github.event.inputs.Synchro == 'true' env.again-fork != '0'
+      if: env.REPO_TOKEN  && github.event.inputs.Synchro == 'true' && env.again-fork != '0'
       run: |
         cd ${GITHUB_WORKSPACE}
         rm -rf shangyou && git clone -b main https://github.com/281677160/autobuild.git shangyou
