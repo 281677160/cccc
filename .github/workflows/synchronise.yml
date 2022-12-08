@@ -25,7 +25,10 @@ on:
       SKIP_E5CPU:
         description: '==删除build里面的文件夹=='
         required: false
+        default: 'true'
         type: boolean
+      Tempoary_IP:
+        description: '固件IP地址 [选填]'
         default: ''
 
 env:
