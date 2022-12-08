@@ -90,11 +90,11 @@ jobs:
           echo "again-fork=4" >> ${GITHUB_ENV}
         fi
         
-        if [[ -n "${{ github.event.inputs.Establish }}" ]]; then
+        if [[ -n "${{ github.event.inputs.establish_sample }}" ]] && [[ -n "${{ github.event.inputs.establish_name }}" ]]; then
           echo "inputs_Establish=1" >> ${GITHUB_ENV}
         fi
         
-        if [[ -n "${{ github.event.inputs.Deletefile }}" ]]; then
+        if [[ -n "${{ github.event.inputs.Deletefile_name }}" ]]; then
           echo "inputs_Deletefile=1" >> ${GITHUB_ENV}
         fi
         
