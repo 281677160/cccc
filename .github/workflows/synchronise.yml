@@ -119,14 +119,10 @@ jobs:
         for cc in ${bb[@]}; do
           if [[ -d "repogx/build/${cc}" ]]; then
             rm -rf repogx/build/"$cc"
+            rm -rf repogx/.github/workflows/${cc}.yml
             echo "已删除[${cc}]文件夹"
           else
             echo "[${cc}]文件夹不存在"
-          fi
-          X="$(find "repogx/.github/workflows" -name "*.yml")"
-          aa="$(grep -Eo 'target: \[${cc}\]' -rl $X)"
-          if [[ -f "$aa" ]]; then
-            rm -rf $aa
           fi
         done
         sudo chmod -R +x ${GITHUB_WORKSPACE}/repogx
