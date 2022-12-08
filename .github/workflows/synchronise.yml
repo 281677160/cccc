@@ -73,6 +73,7 @@ jobs:
         
         if [[ -n "${{ github.event.inputs.fork }}" ]]; then
           echo "again-delete=1" >> ${GITHUB_ENV}
+          echo "${{ github.event.inputs.fork }}"
         fi
         
     - name: 同步更新上游仓库
