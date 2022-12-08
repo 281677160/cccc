@@ -25,6 +25,12 @@ on:
       delete:
         description: '删除机型文件夹,一次删除多个用英文逗号分隔'
         default: ''
+      jianli:
+        description: '于BUILD文件夹里面的某个文件为蓝本建立机型文件夹'
+        default: ''
+      jixing:
+        description: '想要建立机型文件夹的名称'
+        default: ''
 
 env:
   REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
@@ -125,6 +131,24 @@ jobs:
             echo "[${cc}]文件夹不存在"
           fi
         done
+        sudo chmod -R +x ${GITHUB_WORKSPACE}/repogx
+        cd ${GITHUB_WORKSPACE}/repogx
+        git add .
+        git commit -m "Update $(date +%Y-%m%d-%H%M%S)"
+        git push --quiet "https://${{ secrets.REPO_TOKEN }}@github.com/${{github.repository}}" HEAD:main
+        echo "删除机型文件夹完成!"
+        
+    - name: 建立机型文件夹
+      run: |
+        git clone -b main https://github.com/${{github.repository}}.git repogx
+        aa="${{ github.event.inputs.jianli }}"
+        bb="${{ github.event.inputs.jixing }}"
+        if [[ ! -d "repogx/build/${bb}" ]]; then
+          cp -Rf repogx/build/"$aa" repogx/build/"$bb"
+          echo "[${bb}]文件夹创建完成"
+        else
+          echo "[${bb}]文件夹已存在"
+        fi
         sudo chmod -R +x ${GITHUB_WORKSPACE}/repogx
         cd ${GITHUB_WORKSPACE}/repogx
         git add .
