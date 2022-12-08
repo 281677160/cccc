@@ -123,9 +123,11 @@ jobs:
           else
             echo "[${cc}]文件夹不存在"
           fi
-          x=$(find "repogx/.github/workflows" -name "*.yml")
+          X="$(find "repogx/.github/workflows" -name "*.yml")"
           aa="$(grep -Eo 'target: \[${cc}\]' -rl $X)"
-          rm -rf $aa
+          if [[ -f "$aa" ]]; then
+            rm -rf $aa
+          fi
         done
         sudo chmod -R +x ${GITHUB_WORKSPACE}/repogx
         cd ${GITHUB_WORKSPACE}/repogx
