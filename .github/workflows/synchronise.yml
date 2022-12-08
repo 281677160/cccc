@@ -149,17 +149,26 @@ jobs:
         SOURCE_CODE1="$(grep 'SOURCE_CODE=' "repogx/build/${bb}/settings.ini" | cut -d '"' -f2)"
         if [[ "${SOURCE_CODE1}" == "AMLOGIC" ]]; then
           cp -Rf shangyou/.github/workflows/Amlogic.yml repogx/.github/workflows/${bb}.yml
+          nn="Amlogic"
         elif [[ "${SOURCE_CODE1}" == "IMMORTALWRT" ]]; then
-          cp -Rf shangyou/.github/workflows/Immortalwrt.yml.yml repogx/.github/workflows/${bb}.yml
+          cp -Rf shangyou/.github/workflows/Immortalwrt.yml repogx/.github/workflows/${bb}.yml
+          nn="Immortalwrt"
         elif [[ "${SOURCE_CODE1}" == "COOLSNOWWOLF" ]]; then
           cp -Rf shangyou/.github/workflows/Lede.yml repogx/.github/workflows/${bb}.yml
+          nn="Lede"
         elif [[ "${SOURCE_CODE1}" == "LIENOL" ]]; then
           cp -Rf shangyou/.github/workflows/Lienol.yml repogx/.github/workflows/${bb}.yml
+          nn="Lienol"
         elif [[ "${SOURCE_CODE1}" == "OFFICIAL" ]]; then
           cp -Rf shangyou/.github/workflows/Official.yml repogx/.github/workflows/${bb}.yml
+          nn="Official"
         elif [[ "${SOURCE_CODE1}" == "XWRT" ]]; then
           cp -Rf shangyou/.github/workflows/Xwrt.yml repogx/.github/workflows/${bb}.yml
+          nn="Xwrt"
         fi
+        
+        yml_name="$(grep 'name:' "repogx/.github/workflows/${bb}.yml"  |grep -v '^#' |awk 'NR==1')"
+        sed -i "s?${yml_name}?name: ${nn}-${bb}?g" "repogx/.github/workflows/${bb}.yml"
         
         sudo chmod -R +x ${GITHUB_WORKSPACE}/repogx
         cd ${GITHUB_WORKSPACE}/repogx
