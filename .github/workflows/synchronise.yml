@@ -71,7 +71,7 @@ jobs:
           echo "again-fork=4" >> ${GITHUB_ENV}
         fi
         
-        if [[ -z "${{ github.event.inputs.fork }}" ]]; then
+        if [[ -n "${{ github.event.inputs.delete }}" ]]; then
           echo "again-delete=1" >> ${GITHUB_ENV}
         fi
         
@@ -135,6 +135,7 @@ jobs:
         echo "删除机型文件夹完成!"
         
     - name: 建立机型文件夹
+      if: env.REPO_TOKEN && env.again-fork == '0' && env.again-delete == '2'
       run: |
         git clone -b main https://github.com/${{github.repository}}.git repogx
         aa="${{ github.event.inputs.jianli }}"
