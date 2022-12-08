@@ -117,10 +117,10 @@ jobs:
         git clone -b main https://github.com/${{github.repository}}.git repogx
         aa="${{ github.event.inputs.delete }}"
         bb=(${aa//,/ })
-
         for cc in ${bb[@]}; do
           if [[ -d "repogx/build/${cc}" ]]; then
             rm -rf repogx/build/"$cc"
+            echo "已删除[${cc}]文件夹"
           else
             echo "[${cc}]文件夹不存在"
           fi
