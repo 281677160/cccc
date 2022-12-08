@@ -114,6 +114,13 @@ jobs:
     name: 启动"${{ github.event.inputs.REPO_BRANCH }}"触发编译
     runs-on: ubuntu-20.04
     if: ${{ github.event.repository.owner.id }} == ${{ github.event.sender.id }}
+    
+    env:
+      FOLDER_NAME: ${{ matrix.target }}
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [Lede]
         
     steps:
     - name: 密匙检测（密匙为空则退出）
