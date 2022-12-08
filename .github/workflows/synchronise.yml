@@ -14,7 +14,7 @@ on:
       SKIP_E5CP:
         description: '====同步上游仓库===='
         required: false
-        default: 'true'
+        default: 'false'
         type: boolean
       fork:
         description: '请选择同步选项'
@@ -29,10 +29,10 @@ on:
       Establish:
         description: '====在build文件夹创建机型文件夹===='
         required: false
-        default: 'true'
+        default: 'false'
         type: boolean
       establish_sample:
-        description: '以build文件夹里有的源码为蓝本（文件夹名称）'
+        description: '输入build文件夹里有的源码为蓝本(文件夹名称)'
         default: ''
       establish_name:
         description: '您需要创建的文件夹名称'
@@ -40,7 +40,7 @@ on:
       Deletefile:
         description: '====删除build里面的文件夹===='
         required: false
-        default: 'true'
+        default: 'false'
         type: boolean
       Deletefile_name:
         description: '请输入要删除的文件夹名称,一次删除多个请用英文逗号分开'
