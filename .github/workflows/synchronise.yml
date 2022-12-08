@@ -71,9 +71,9 @@ jobs:
           echo "again-fork=4" >> ${GITHUB_ENV}
         fi
         
-        if [[ -n "${{ github.event.inputs.fork }}" ]]; then
+        if [[ -n "${{ github.event.inputs.delete }}" ]]; then
           echo "again-delete=1" >> ${GITHUB_ENV}
-          echo "${{ github.event.inputs.fork }}"
+          echo "${{ github.event.inputs.delete }}"
         fi
         
     - name: 同步更新上游仓库
