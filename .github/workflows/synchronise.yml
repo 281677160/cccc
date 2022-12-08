@@ -119,7 +119,7 @@ jobs:
         for cc in ${bb[@]}; do
           if [[ -d "repogx/build/${cc}" ]]; then
             rm -rf repogx/build/"$cc"
-            rm -rf $(grep -rl "target: \[$cc\]" "repogx/.github/workflows" |grep -v '^#\|compile')
+            rm -rf $(grep -rl "target: \[$cc\]" "repogx/.github/workflows" |sed 's/^[ ]*//g' |grep -v '^#\|compile')
             echo "已删除[${cc}]文件夹"
           else
             echo "[${cc}]文件夹不存在"
