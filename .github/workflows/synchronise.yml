@@ -11,8 +11,13 @@ name: 同步上游仓库
 on:
   workflow_dispatch:
     inputs:
+      SKIP_E5CP:
+        description: '==同步上游仓库选择=='
+        required: false
+        default: 'true'
+        type: boolean
       fork:
-        description: '同步上游仓库选择'
+        description: '请选择'
         required: false
         default: '关闭'
         type: choice
