@@ -20,14 +20,14 @@ on:
   workflow_dispatch:
     inputs:
       REPO_BRANCH:
-        description: '大雕源码'
+        description: '大雕源码111'
         required: false
         default: 'master'
         type: choice
         options:
           - 'master'
       CONFIG_FILE:
-        description: '配置文件'
+        description: '配置文件222'
         required: false
         default: 'x86_64'
         type: choice
