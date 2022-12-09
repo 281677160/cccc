@@ -15,32 +15,27 @@
 #
 #
 
-name: Lede-Lede_x86_64
+name: Lienol-源码
 on:
   workflow_dispatch:
     inputs:
       REPO_BRANCH:
-        description: '大雕源码'
+        description: 'Lienol源码-请选择分支'
         required: false
         default: 'master'
         type: choice
         options:
           - 'master'
+          - '21.02'
+          - '19.07'
+          - '19.07-cannotuse'
       CONFIG_FILE:
         description: '配置文件'
         required: false
         default: 'x86_64'
         type: choice
         options:
-          - 'asus_rt-acrh17'
-          - 'd-team_newifi-d2'
-          - 'p2w_r619ac-128m'
-          - 'x86_32'
           - 'x86_64'
-          - 'xiaomi_mi-router-4a-gigabit'
-          - 'xiaomi_redmi-router-ac2100'
-          - 'xiaomi_redmi-router-ax6s'
-          - 'xiaoyu_xy-c5'
       CPU_SELECTION:
         description: 'CPU优选,增加编译速度'
         required: false
@@ -94,7 +89,7 @@ on:
 
 # 定时触发开启开始编译(把下面两个#去掉开启,时间设置请看定时开启编译说明)
 #  schedule:
-#   - cron: 50 8 * * *
+#   - cron: 35 18 * * *
 
 env:
   GITHUB_LINK: https://github.com/${{github.repository}}
@@ -119,9 +114,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [Lede_x86_64]
+        target: [Lienol]
         
-        # 请勿对 target: [Lede_x86_64] 做任何修改
+        # 请勿对 target: [Lienol] 做任何修改
         
     steps:
     - name: 密匙检测（密匙为空则退出）

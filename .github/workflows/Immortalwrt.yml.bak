@@ -15,16 +15,19 @@
 #
 #
 
-name: Lede-Lede_x86_64
+name: Immortalwrt-天灵
 on:
   workflow_dispatch:
     inputs:
       REPO_BRANCH:
-        description: '大雕源码'
+        description: '天灵源码-请选择分支'
         required: false
-        default: 'master'
+        default: 'openwrt-21.02'
         type: choice
         options:
+          - 'openwrt-21.02'
+          - 'openwrt-18.06-k5.4'
+          - 'openwrt-18.06'
           - 'master'
       CONFIG_FILE:
         description: '配置文件'
@@ -32,15 +35,7 @@ on:
         default: 'x86_64'
         type: choice
         options:
-          - 'asus_rt-acrh17'
-          - 'd-team_newifi-d2'
-          - 'p2w_r619ac-128m'
-          - 'x86_32'
           - 'x86_64'
-          - 'xiaomi_mi-router-4a-gigabit'
-          - 'xiaomi_redmi-router-ac2100'
-          - 'xiaomi_redmi-router-ax6s'
-          - 'xiaoyu_xy-c5'
       CPU_SELECTION:
         description: 'CPU优选,增加编译速度'
         required: false
@@ -94,7 +89,7 @@ on:
 
 # 定时触发开启开始编译(把下面两个#去掉开启,时间设置请看定时开启编译说明)
 #  schedule:
-#   - cron: 50 8 * * *
+#   - cron: 35 18 * * *
 
 env:
   GITHUB_LINK: https://github.com/${{github.repository}}
@@ -119,9 +114,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [Lede_x86_64]
+        target: [Immortalwrt]
         
-        # 请勿对 target: [Lede_x86_64] 做任何修改
+        # 请勿对 target: [Immortalwrt] 做任何修改
         
     steps:
     - name: 密匙检测（密匙为空则退出）
@@ -266,17 +261,17 @@ jobs:
       run: |
         if [[ "${{ env.INFORMATION_NOTICE }}" == "TG" ]]; then
           if [[ "${{steps.gitpush.outcome}}" == 'success' ]] && [[ "${{steps.compile.outcome}}" == 'success' ]]; then
-            curl -k --data chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" --data "text=🎉 主人💕：您的编译脚本成功触发【${{ env.FOLDER_NAME }}】文件夹编译【${{env.TARGET_PROFILE}}】固件中,请耐心等待...... 😋(${{env.Tongzhi_Date}})" "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage"
+            curl -k --data chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" --data "text=🎉 主人💕：您的编译脚本成功触发【${FOLDER_NAME}】文件夹编译【${{env.TARGET_PROFILE}}】固件中,请耐心等待...... 😋(${{env.Tongzhi_Date}})" "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage"
           else
-            curl -k --data chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" --data "text=💥主人❌ ：上游扩展错误或者脚本错误,触发启动【${{ env.FOLDER_NAME }}】失败,请点击触发脚本步骤查看详情!(${{env.Tongzhi_Date}})" "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage"
+            curl -k --data chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" --data "text=💥主人❌ ：上游扩展错误或者脚本错误,触发启动【${FOLDER_NAME}】失败,请点击触发脚本步骤查看详情!(${{env.Tongzhi_Date}})" "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage"
             exit 1
           fi
         fi
         if [[ "${{ env.INFORMATION_NOTICE }}" == "PUSH" ]]; then
           if [[ "${{steps.gitpush.outcome}}" == 'success' ]] && [[ "${{steps.compile.outcome}}" == 'success' ]]; then
-            curl -k --data token="${{ secrets.PUSH_PLUS_TOKEN }}" --data title="开始编译【${{ env.FOLDER_NAME }}】" --data "content=🎉 主人💕：您的编译脚本成功触发【${{ env.FOLDER_NAME }}】文件夹编译【${{env.TARGET_PROFILE}}】固件中,请耐心等待...... 😋(${{env.Tongzhi_Date}})" "http://www.pushplus.plus/send"
+            curl -k --data token="${{ secrets.PUSH_PLUS_TOKEN }}" --data title="开始编译【${FOLDER_NAME}】" --data "content=🎉 主人💕：您的编译脚本成功触发【${FOLDER_NAME}】文件夹编译【${{env.TARGET_PROFILE}}】固件中,请耐心等待...... 😋(${{env.Tongzhi_Date}})" "http://www.pushplus.plus/send"
           else
-            curl -k --data token="${{ secrets.PUSH_PLUS_TOKEN }}" --data title="触发启动失败" --data "content=💥主人❌ ：上游扩展错误或者脚本错误,触发启动【${{ env.FOLDER_NAME }}】失败,请点击触发脚本步骤查看详情!(${{env.Tongzhi_Date}})" "http://www.pushplus.plus/send"
+            curl -k --data token="${{ secrets.PUSH_PLUS_TOKEN }}" --data title="触发启动失败" --data "content=💥主人❌ ：上游扩展错误或者脚本错误,触发启动【${FOLDER_NAME}】失败,请点击触发脚本步骤查看详情!(${{env.Tongzhi_Date}})" "http://www.pushplus.plus/send"
             exit 1
           fi
         fi
