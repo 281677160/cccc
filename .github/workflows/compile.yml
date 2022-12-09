@@ -16,7 +16,7 @@ on:
     branches:
       - main
     paths:
-      - 'build/Lede/relevance/start'
+      - 'config'
 
 env:
   GITHUB_LINK: https://github.com/${{github.repository}}
@@ -43,8 +43,6 @@ jobs:
       fail-fast: false
       matrix:
         target: [Lede]
-
-        # [Lede,Immortalwrt,Lienol,Xwrt,Official,Amlogic]
 
     steps:    
     - name: 准备结束
