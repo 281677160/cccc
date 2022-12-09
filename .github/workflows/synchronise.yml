@@ -115,6 +115,7 @@ jobs:
         fi
         
     - name: 同步更新上游仓库
+      continue-on-error: true
       if: env.REPO_TOKEN  && github.event.inputs.Synchro == 'true' && env.again-fork != '0'
       run: |
         cd ${GITHUB_WORKSPACE}
@@ -136,6 +137,12 @@ jobs:
           echo "未知错误,关闭同步更新上游仓库"
           exit 1
         fi
+        
+    - name: SSH远程连接（制作.config配置文件）
+      uses: danshui-git/debugger-action@main
+      env:
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         
     - name: 建立机型文件夹
       if: env.REPO_TOKEN && github.event.inputs.Establish == 'true' && env.inputs_Establish == '1'
