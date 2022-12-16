@@ -52,10 +52,9 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    name: 启动"同步,创建,删除"
+    runs-on: ubuntu-20.04
     if: ${{ github.event.repository.owner.id }} == ${{ github.event.sender.id }}
-    
-    name: 同步上游仓库
     
     steps:
     - name: 密匙检测（密匙为空则退出）
