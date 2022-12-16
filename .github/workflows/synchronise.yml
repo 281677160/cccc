@@ -1,6 +1,7 @@
-
 #
-# 同步上游仓库或者清理发布都需要用REPO_TOKEN密匙
+# 同步程序,请勿修改文件名称（synchronise.yml）
+#
+# 同步上游仓库和使用此仓库都需要用到REPO_TOKEN密匙
 #
 # REPO_TOKEN密匙制作教程：https://git.io/jm.md
 #
