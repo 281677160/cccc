@@ -13,7 +13,7 @@
 #
 #
 
-name: Amlogic-Amlogic_123
+name: Amlogic-Amlogic
 on:
   workflow_dispatch:
     inputs:
@@ -106,7 +106,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [Amlogic_123]
+        target: [Amlogic]
         
     steps:
     - name: 密匙检测（密匙为空则退出）
